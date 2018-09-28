@@ -1,0 +1,7 @@
+1.spring-chapter1此项目使用spring-context的jar来实现简单的spring调用。
+	a.我们使用ClassPathXmlApplication()来创建应用程序的上下文,
+	  这个API加载bean的配置文件并最终基于所提供的API,
+	  他处理创建并初始化所有的对象，即在配置文件中提到的bean
+	b.使用getBean()来获取所需的bean,这个方法使用所配置bean的ID，
+	  返回一个最终可以转换为实际对象的通用对象，然后根据返回的对象调用它的属性
+	
