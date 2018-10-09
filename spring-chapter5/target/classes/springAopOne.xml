@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="helloWorldImpl1" class="com.kai.chap.HelloWorldImpl1"></bean>
+    <bean id="helloWorldImpl2" class="com.kai.chap.HelloWorldImpl2"></bean>
+    <bean id="timeHandler" class="com.kai.chap.TimeHandler"></bean>
+
+    <!--
+        timeHandler切入点配置，执行类中的每个方法前后都植入这个timeHandler切入点。
+         由于生成代理类有两种方式：JDK和CGLIB，一种是基于接口的，一种是基于类的。
+         如果添加proxy-target-class="true"属性说明使用的是基于（类）的CGLIB方式，
+         如果没有写这个属性或者proxy-target-class="false"则说明是通过JDK的基于接口的方式生成代理类的。
+         aop:aspect定义切面，ref属性代表指向要切入的东西。
+         aop:pointcut配置要使用这个切点的路径（我们这里说明com.kai.chap.IHelloWorld类中的所有方法都需要执行这个切面）。
+         aop:before说明在执行方法前先执行这个切入点
+         aop:after说明在执行方法后执行这个切入点
+    -->
+    <aop:config proxy-target-class="true">
+        <aop:aspect id="time" ref="timeHandler">
+            <aop:pointcut id="addAllMethod" expression="execution(* com.kai.chap.IHelloWorld.*(..))"/>
+            <aop:before method="printTime" pointcut-ref="addAllMethod"/>
+            <aop:after method="printTime" pointcut-ref="addAllMethod"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

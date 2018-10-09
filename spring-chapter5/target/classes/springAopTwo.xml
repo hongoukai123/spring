@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="helloWorldImpl1" class="com.kai.chap.HelloWorldImpl1"></bean>
+    <bean id="helloWorldImpl2" class="com.kai.chap.HelloWorldImpl2"></bean>
+    <bean id="timeHandler" class="com.kai.chap.TimeHandler"></bean>
+    <bean id="logHandler" class="com.kai.chap.LogHandler"></bean>
+
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="addAllMethod" expression="execution(* com.kai.chap.IHelloWorld.*(..))"/>
+        <aop:aspect id="time" ref="timeHandler">
+            <aop:before method="printTime" pointcut-ref="addAllMethod"/>
+            <aop:after method="printTime" pointcut-ref="addAllMethod"/>
+        </aop:aspect>
+        <aop:aspect id="log" ref="logHandler">
+            <aop:before method="logBefore" pointcut-ref="addAllMethod"/>
+            <aop:after method="logAfter" pointcut-ref="addAllMethod"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
