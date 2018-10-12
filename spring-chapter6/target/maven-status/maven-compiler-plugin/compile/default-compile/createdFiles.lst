@@ -1,0 +1,4 @@
+com\kai\chap\dao\StudentDAO.class
+com\kai\chap\dao\impl\StudentDAOImpl.class
+com\kai\chap\entity\Student.class
+com\kai\chap\dao\StudentMapper.class

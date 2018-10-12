@@ -35,6 +35,9 @@ public class MainApp {
         studentDAOImpl.update(3,50);
         System.out.println("-------------------------------------");
         studentDAOImpl.delete(3);
+        System.out.println("-------------------------------------");
+        System.out.println("-------------------------------------");
+        System.out.println("-------------------------------------");
     }
 
 }
